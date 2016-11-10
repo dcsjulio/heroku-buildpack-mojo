@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# this pack is valid for apps with an app.pl in the root
+if [ -f $1/app.pl ]; then
+  echo "Perl/Mojolicious"
+  exit 0
+else
+  exit 1
+fi
