@@ -6,5 +6,5 @@ addons:
 config_vars:
   PATH: local/bin:/usr/local/bin:/usr/bin:/bin
 default_process_types:
-  web: perl -Mlib=\$PWD/local/lib/perl5 app.pl daemon -l http://*:\$PORT -m production
+  web: mojostart.sh
 EOF

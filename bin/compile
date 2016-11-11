@@ -40,6 +40,26 @@ echo "-----> Installing dependencies"
 echo "cpanm options: $PERL_CPANM_OPT" | indent
 cpanm --installdeps . 2>&1 | indent
 
+echo "-----> Detect app type and create startup script"
+COMMONCMD="#!/bin/sh\nperl -Mlib=\$PWD/local/lib/perl5"
+if [ -f $ENV_DIR/app.pl ] || [ -f $ENV_DIR/app-daemon.pl ]; then
+  echo "It is a Mojolicious app with Daemon" | indent
+  DAEMONSETUP="daemon -l http://*:\$PORT -m production\n"
+  if [ -f $ENV_DIR/app.pl ]; then
+    echo "$COMMONCMD app.pl $DAEMONSETUP" > $ENV_DIR/mojostart.sh
+  else
+    echo "$COMMONCMD app-daemon.pl $DAEMONSETUP" > $ENV_DIR/mojostart.sh
+  fi
+elif [ -f $ENV_DIR/app-hypnotoad.pl ]; then
+  echo "It is a Mojolicious app with Hypnotoad" | indent
+  TOADSETUP="./local/bin/hypnotoad -f"
+  echo "$COMMONCMD $TOADSETUP app-hypnotoad.pl\n" > $ENV_DIR/mojostart.sh
+else
+  echo "\nERROR: Then app name is not correct"
+  exit 1
+fi
+chmod a+x $ENV_DIR/mojostart.sh
+
 if [ -d $BUILD_DIR/local ]; then
   rm -rf $CACHE_DIR/local
   mkdir -p $CACHE_DIR

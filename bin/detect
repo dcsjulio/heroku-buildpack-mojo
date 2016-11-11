@@ -1,8 +1,11 @@
 #!/bin/sh
 
 # this pack is valid for apps with an app.pl in the root
-if [ -f $1/app.pl ]; then
-  echo "Perl/Mojolicious"
+if [ -f $1/app.pl ] || [ -f $1/app-daemon.pl ]; then
+  echo "Perl/Mojolicious_Daemon"
+  exit 0
+elif [ -f $1/app-hypnotoad.pl ]; then
+  echo "Perl/Mojolicious_Hypnotoad"
   exit 0
 else
   exit 1

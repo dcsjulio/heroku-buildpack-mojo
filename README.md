@@ -1,9 +1,10 @@
 Heroku buildpack: Mojo
 ======================
 
-This is a Heroku buildpack that runs Mojolicious based web applications using Daemon.
+This is a Heroku buildpack that runs Mojolicious based web applications using Daemon or Hypertoad.
 
-Based on: miyagawa/heroku-buildpack-perl
+Heavily base on: miyagawa/heroku-buildpack-perl
+All credits to miyagawa
 
 Usage
 -----
@@ -12,7 +13,7 @@ Example usage:
 
     $ ls
     cpanfile
-    app.psgi
+    app-daemon.pl
     lib/
 
     $ cat cpanfile
@@ -28,7 +29,20 @@ Example usage:
     -----> Perl/Mojolicious app detected
     -----> Installing dependencies
 
-The buildpack will detect that your app has an `app.pl` in the root.
+The following app names will be deteced by the buildpack in the root:
+  app.pl (starts daemon)
+  app-daemon.pl (starts daemon)
+  app-hypnotoad.pl (starts hypnotoad)
+
+WARNING: hypnotad needs the app to be preconfigured to listen at port $ENV{PORT}
+For example:
+plugin Config => {
+    default => {
+        hypnotoad => {
+            listen => ["http://*:$ENV{PORT}"]
+            }
+        }
+    };
 
 Libraries
 ---------
