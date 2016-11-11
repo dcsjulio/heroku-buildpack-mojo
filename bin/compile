@@ -46,16 +46,16 @@ if [ -f $BUILD_DIR/app.pl ] || [ -f $BUILD_DIR/app-daemon.pl ]; then
   echo "It is a Mojolicious app with Daemon" | indent
   DAEMONSETUP="daemon -l http://*:\$PORT -m production\n"
   if [ -f $BUILD_DIR/app.pl ]; then
-    echo "$COMMONCMD app.pl $DAEMONSETUP" > $BUILD_DIR/mojostart.sh
+    printf "$COMMONCMD app.pl $DAEMONSETUP" > $BUILD_DIR/mojostart.sh
   else
-    echo "$COMMONCMD app-daemon.pl $DAEMONSETUP" > $BUILD_DIR/mojostart.sh
+    printf "$COMMONCMD app-daemon.pl $DAEMONSETUP" > $BUILD_DIR/mojostart.sh
   fi
 elif [ -f $BUILD_DIR/app-hypnotoad.pl ]; then
   echo "It is a Mojolicious app with Hypnotoad" | indent
   TOADSETUP="./local/bin/hypnotoad -f"
-  echo "$COMMONCMD $TOADSETUP app-hypnotoad.pl\n" > $BUILD_DIR/mojostart.sh
+  printf "$COMMONCMD $TOADSETUP app-hypnotoad.pl\n" > $BUILD_DIR/mojostart.sh
 else
-  echo "\nERROR: Then app name is not correct"
+  printf "\nERROR: Then app name is not correct"
   exit 1
 fi
 chmod a+x $BUILD_DIR/mojostart.sh
