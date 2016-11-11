@@ -41,7 +41,7 @@ echo "cpanm options: $PERL_CPANM_OPT" | indent
 cpanm --installdeps . 2>&1 | indent
 
 echo "-----> Detect app type and create startup script"
-COMMONCMD="#!/bin/sh\nperl -Mlib=\$PWD/local/lib/perl5"
+COMMONCMD="#!/bin/sh\nPERL5LIB=\$PWD/local/lib/perl5/ perl -Mlib=\$PWD/local/lib/perl5"
 if [ -f $BUILD_DIR/app.pl ] || [ -f $BUILD_DIR/app-daemon.pl ]; then
   echo "It is a Mojolicious app with Daemon" | indent
   DAEMONSETUP="daemon -l http://*:\$PORT -m production\n"
