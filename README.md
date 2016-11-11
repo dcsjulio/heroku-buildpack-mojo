@@ -27,7 +27,7 @@ Example usage:
     ...
     -----> Heroku receiving push
     -----> Fetching custom buildpack
-    -----> Perl/Mojolicious app detected
+    -----> Perl/Mojolicious_Daemon detected
     -----> Installing dependencies
 
 The following app names will be deteced by the buildpack in the root:
