@@ -5,7 +5,7 @@ This is a Heroku buildpack that runs Mojolicious based web applications using Da
 
 Heavily based on: miyagawa/heroku-buildpack-perl
 
-All credits to miyagawa
+All credits to miyagawa.
 
 Usage
 -----
