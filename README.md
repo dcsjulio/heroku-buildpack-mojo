@@ -1,7 +1,7 @@
 Heroku buildpack: Mojo
 ======================
 
-This is a Heroku buildpack that runs Mojolicious based web applications using Daemon or Hypertoad.
+This is a Heroku buildpack that runs Mojolicious based web applications using Daemon or Hypnotoad.
 
 Heavily based on: miyagawa/heroku-buildpack-perl
 
